@@ -24,7 +24,7 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
   TextEditingController textEditingController = TextEditingController();
   ListItemBuilder? itemBuilder;
   Widget? seperatedBuilder;
-  void clearData;
+  VoidCallback? clearData;
   BoxDecoration? boxDecoration;
   bool isCrossBtnShown;
   bool showError;
@@ -324,7 +324,7 @@ class _GooglePlaceAutoCompleteTextFieldState
       alPredictions.clear();
       isCrossBtn = false;
     });
-
+widget.clearData?.call();
     if (this._overlayEntry != null) {
       try {
         this._overlayEntry?.remove();
