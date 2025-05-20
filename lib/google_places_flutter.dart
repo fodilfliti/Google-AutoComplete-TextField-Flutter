@@ -132,6 +132,9 @@ class _GooglePlaceAutoCompleteTextFieldState
                     isCrossBtn = string.isNotEmpty ? true : false;
                     setState(() {});
                   }
+                   if(string.isEmpty){
+                    widget.clearData?.call();
+                  }
                 },
               ),
             ),
