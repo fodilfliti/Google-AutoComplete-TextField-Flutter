@@ -28,6 +28,7 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
   BoxDecoration? boxDecoration;
   bool isCrossBtnShown;
   bool showError;
+  bool closeWhenClickOutside;
   double? containerHorizontalPadding;
   double? containerVerticalPadding;
   FocusNode? focusNode;
@@ -43,6 +44,7 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
 
   /// This is expressed in **meters**
   final int? radius;
+  
 
   GooglePlaceAutoCompleteTextField(
       {required this.textEditingController,
@@ -70,7 +72,8 @@ class GooglePlaceAutoCompleteTextField extends StatefulWidget {
       this.radius,
       this.formSubmitCallback,
       this.textInputAction,
-      this.clearData});
+      this.clearData,
+      this.closeWhenClickOutside = false});
 
   @override
   _GooglePlaceAutoCompleteTextFieldState createState() =>
@@ -112,6 +115,11 @@ class _GooglePlaceAutoCompleteTextFieldState
           children: [
             Expanded(
               child: TextFormField(
+                onTapUpOutside: (event) {
+                  if (widget.closeWhenClickOutside) {
+                    FocusScope.of(context).unfocus();
+                  }
+                },
                 decoration: widget.inputDecoration,
                 style: widget.textStyle,
                 controller: widget.textEditingController,
