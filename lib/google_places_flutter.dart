@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_places_flutter/model/place_details.dart';
 import 'package:google_places_flutter/model/place_type.dart';
 import 'package:google_places_flutter/model/prediction.dart';
+import 'package:flutter/services.dart';
 
 import 'package:dio/dio.dart';
 import 'package:rxdart/rxdart.dart';
@@ -117,7 +118,7 @@ class _GooglePlaceAutoCompleteTextFieldState
               child: TextFormField(
                 onTapUpOutside: (event) {
                   if (widget.closeWhenClickOutside) {
-                    FocusScope.of(context).unfocus();
+                    SystemChannels.textInput.invokeMethod('TextInput.hide');
                   }
                 },
                 decoration: widget.inputDecoration,
